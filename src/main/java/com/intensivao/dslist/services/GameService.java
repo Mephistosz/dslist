@@ -22,4 +22,9 @@ public class GameService {
     return result.stream().map(GameMinDTO::new).toList();
   }
 
+  public Game findById(Long id) {
+    return gameRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("teste"));
+  }
+
 }
