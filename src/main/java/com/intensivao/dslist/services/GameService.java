@@ -19,7 +19,7 @@ public class GameService {
     List<Game> result = gameRepository.findAll();
     // para cada valor em result ele troca o objeto por o de um novo objeto do tipo
     // gameMinDTO e transforma em lista
-    return result.stream().map(x -> new GameMinDTO(x)).toList();
+    return result.stream().map(GameMinDTO::new).toList();
   }
 
 }
