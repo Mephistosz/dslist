@@ -32,4 +32,9 @@ public class GameService {
         .orElseThrow(() -> new ResourceNotFoundException("Object not found")));
   }
 
+  @Transactional(readOnly = true)
+  public List<GameMinDTO> findByList(Long id) {
+    return gameRepository.searchByList(id).stream().map(GameMinDTO::new).toList();
+  }
+
 }
