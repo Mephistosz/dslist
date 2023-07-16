@@ -17,6 +17,8 @@ public class Game {
 
   private String title;
   private String genre;
+  @Column(name = "game_year")
+  private Integer year;
   private String platforms;
   private Double score;
   private String imgUrl;
@@ -26,9 +28,6 @@ public class Game {
 
   @Column(columnDefinition = "TEXT")
   private String longDescription;
-
-  @Column(name = "game_year")
-  private Integer year;
 
   public Game() {
   }

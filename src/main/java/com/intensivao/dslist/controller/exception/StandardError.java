@@ -1,6 +1,9 @@
 package com.intensivao.dslist.controller.exception;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class StandardError {
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
   private Long timestamp;
   private Integer status;
   private String error;
