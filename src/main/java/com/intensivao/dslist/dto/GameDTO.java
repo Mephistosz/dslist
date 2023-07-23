@@ -1,8 +1,12 @@
 package com.intensivao.dslist.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
 import com.intensivao.dslist.entities.Game;
+import com.intensivao.dslist.entities.Platforms;
 
 public class GameDTO {
 
@@ -10,7 +14,7 @@ public class GameDTO {
   private String title;
   private String genre;
   private Integer year;
-  private String platforms;
+  private List<Platforms> platforms = new ArrayList<>();
   private Double score;
   private String imgUrl;
   private String shortDescription;
@@ -21,6 +25,7 @@ public class GameDTO {
 
   public GameDTO(Game game) {
     BeanUtils.copyProperties(game, this); // copiar tudo e joga nas variaveis da classe, vars precisam estar iguais
+    this.platforms = game.getPlatforms();
   }
 
   public Long getId() {
@@ -47,12 +52,16 @@ public class GameDTO {
     this.genre = genre;
   }
 
-  public String getPlatforms() {
+  public List<Platforms> getPlatforms() {
     return platforms;
   }
 
-  public void setPlatforms(String platforms) {
-    this.platforms = platforms;
+  public void addPlatforms(Platforms platforms) {
+    this.platforms.add(platforms);
+  }
+
+  public void removePlatforms(Platforms platforms) {
+    this.platforms.remove(platforms);
   }
 
   public Double getScore() {

@@ -1,34 +1,34 @@
 package com.intensivao.dslist.controller.exception;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class StandardError {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-  private Long timestamp;
+  private LocalDateTime timestamp;
   private Integer status;
   private String error;
-  private String exception;
   private String message;
   private String path;
 
   public StandardError() {
   }
 
-  public StandardError(Long timestamp, Integer status, String error, String exception, String message,
+  public StandardError(LocalDateTime timestamp, Integer status, String error, String message,
       String path) {
     this.timestamp = timestamp;
     this.status = status;
     this.error = error;
-    this.exception = exception;
     this.message = message;
     this.path = path;
   }
 
-  public Long getTimestamp() {
+  public LocalDateTime getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Long timestamp) {
+  public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
   }
 
@@ -46,14 +46,6 @@ public class StandardError {
 
   public void setError(String error) {
     this.error = error;
-  }
-
-  public String getException() {
-    return exception;
-  }
-
-  public void setException(String exception) {
-    this.exception = exception;
   }
 
   public String getMessage() {

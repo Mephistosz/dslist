@@ -1,15 +1,24 @@
 package com.intensivao.dslist.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_game")
-public class Game {
+public class Game implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +26,13 @@ public class Game {
 
   private String title;
   private String genre;
+
   @Column(name = "game_year")
   private Integer year;
-  private String platforms;
+
+  @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private List<Platforms> platforms = new ArrayList<>();
+
   private Double score;
   private String imgUrl;
 
@@ -32,12 +45,11 @@ public class Game {
   public Game() {
   }
 
-  public Game(Long id, String title, String genre, String platforms, String imgUrl, String shortDescription,
+  public Game(Long id, String title, String genre, String imgUrl, String shortDescription,
       String longDescription, Integer year, Double score) {
     this.id = id;
     this.title = title;
     this.genre = genre;
-    this.platforms = platforms;
     this.score = score;
     this.imgUrl = imgUrl;
     this.shortDescription = shortDescription;
@@ -49,68 +61,72 @@ public class Game {
     return id;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public Integer getYear() {
-    return year;
-  }
-
-  public String getGenre() {
-    return genre;
-  }
-
-  public String getPlatforms() {
-    return platforms;
-  }
-
-  public Double getScore() {
-    return score;
-  }
-
-  public String getImgUrl() {
-    return imgUrl;
-  }
-
-  public String getShortDescription() {
-    return shortDescription;
-  }
-
-  public String getLongDescription() {
-    return longDescription;
-  }
-
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
   }
 
   public void setTitle(String title) {
     this.title = title;
   }
 
-  public void setYear(Integer year) {
-    this.year = year;
+  public String getGenre() {
+    return genre;
   }
 
   public void setGenre(String genre) {
     this.genre = genre;
   }
 
-  public void setPlatforms(String platforms) {
-    this.platforms = platforms;
+  public Integer getYear() {
+    return year;
+  }
+
+  public void setYear(Integer year) {
+    this.year = year;
+  }
+
+  public List<Platforms> getPlatforms() {
+    return platforms;
+  }
+
+  public void addPlatforms(Platforms platforms) {
+    this.platforms.add(platforms);
+  }
+
+  public void removePlatforms(Platforms platforms) {
+    this.platforms.remove(platforms);
+  }
+
+  public Double getScore() {
+    return score;
   }
 
   public void setScore(Double score) {
     this.score = score;
   }
 
+  public String getImgUrl() {
+    return imgUrl;
+  }
+
   public void setImgUrl(String imgUrl) {
     this.imgUrl = imgUrl;
   }
 
+  public String getShortDescription() {
+    return shortDescription;
+  }
+
   public void setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
+  }
+
+  public String getLongDescription() {
+    return longDescription;
   }
 
   public void setLongDescription(String longDescription) {

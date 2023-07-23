@@ -3,12 +3,13 @@ package com.intensivao.dslist.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.intensivao.dslist.dto.GameDTO;
 import com.intensivao.dslist.dto.GameMinDTO;
-import com.intensivao.dslist.entities.Game;
 import com.intensivao.dslist.repositories.GameRepository;
 import com.intensivao.dslist.services.exception.ResourceNotFoundException;
 
@@ -19,11 +20,8 @@ public class GameService {
   private GameRepository gameRepository;
 
   @Transactional(readOnly = true)
-  public List<GameMinDTO> findAll() {
-    List<Game> result = gameRepository.findAll();
-    // para cada valor em result ele troca o objeto por o de um novo objeto do tipo
-    // gameMinDTO e transforma em lista
-    return result.stream().map(GameMinDTO::new).toList();
+  public Page<GameMinDTO> searchAll(Pageable pageable) {
+    return gameRepository.searchAll(pageable).map(GameMinDTO::new);
   }
 
   @Transactional(readOnly = true)

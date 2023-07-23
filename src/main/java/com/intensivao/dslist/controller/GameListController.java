@@ -29,7 +29,7 @@ public class GameListController {
   @Autowired
   private GameService gameService;
 
-  @GetMapping()
+  @GetMapping
   public ResponseEntity<List<GameListDTO>> findAll() {
     return ResponseEntity.ok().body(gameListService.findAll());
   }
