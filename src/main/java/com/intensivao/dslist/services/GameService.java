@@ -27,7 +27,7 @@ public class GameService {
   @Transactional(readOnly = true)
   public GameDTO findById(Long id) {
     return new GameDTO(gameRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Object not found")));
+        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id)));
   }
 
   @Transactional(readOnly = true)

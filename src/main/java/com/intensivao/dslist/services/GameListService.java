@@ -10,6 +10,7 @@ import com.intensivao.dslist.dto.GameListDTO;
 import com.intensivao.dslist.projections.GameMinProjection;
 import com.intensivao.dslist.repositories.GameListRepository;
 import com.intensivao.dslist.repositories.GameRepository;
+import com.intensivao.dslist.services.exception.ResourceNotFoundException;
 
 @Service
 public class GameListService {
@@ -27,7 +28,12 @@ public class GameListService {
 
   @Transactional
   public void move(Long listId, int sourceIndex, int destinationIndex) {
+
     List<GameMinProjection> list = gameRepository.searchByList(listId);
+
+    if (list.isEmpty()) {
+      throw new ResourceNotFoundException("List not found with id: " + listId);
+    }
 
     GameMinProjection obj = list.remove(sourceIndex);
 

@@ -1,7 +1,14 @@
 package com.intensivao.dslist.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+
 public class ReplacementDTO {
+
+  @NotNull(message = "The value can't be null")
+  @Max(value = 100, message = "The value has to be equal to or less than 100")
   private Integer sourceIndex;
+  @Max(value = 100, message = "The value has to be equal to or less than 100")
   private Integer destinationIndex;
 
   public ReplacementDTO() {

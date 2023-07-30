@@ -19,6 +19,9 @@ import com.intensivao.dslist.dto.ReplacementDTO;
 import com.intensivao.dslist.services.GameListService;
 import com.intensivao.dslist.services.GameService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping(value = "/gameLists")
 public class GameListController {
@@ -40,7 +43,8 @@ public class GameListController {
   }
 
   @PostMapping(value = "/{listId}/replacement")
-  public ResponseEntity<Void> replacement(@PathVariable Long listId, @RequestBody ReplacementDTO replacementDTO) {
+  public ResponseEntity<Void> replacement(@PathVariable @NotNull Long listId,
+      @RequestBody @Valid ReplacementDTO replacementDTO) {
 
     gameListService.move(listId, replacementDTO.getSourceIndex(),
         replacementDTO.getDestinationIndex());

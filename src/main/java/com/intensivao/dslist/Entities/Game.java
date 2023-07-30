@@ -7,13 +7,15 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@NamedEntityGraph(name = "game-platforms", attributeNodes = @NamedAttributeNode("platforms"))
 @Entity
 @Table(name = "tb_game")
 public class Game implements Serializable {
@@ -30,7 +32,7 @@ public class Game implements Serializable {
   @Column(name = "game_year")
   private Integer year;
 
-  @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
   private List<Platforms> platforms = new ArrayList<>();
 
   private Double score;
